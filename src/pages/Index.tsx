@@ -319,6 +319,9 @@ export default function Index() {
           {/* CTEs Faturados */}
           <CTEList limit={10} />
 
+          {/* Painel de Veículos / Frota */}
+          <VeiculosPanel />
+
         </div>
       )}
 
