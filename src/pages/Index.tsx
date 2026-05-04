@@ -8,6 +8,7 @@ import FilialGroupedChart from '@/components/dashboard/FilialGroupedChart';
 import DataTable from '@/components/dashboard/DataTable';
 import ClientDrawer from '@/components/dashboard/ClientDrawer';
 import Filters from '@/components/dashboard/Filters';
+import CTEList from '@/components/dashboard/CTEList';
 import {
   dadosMensais, dadosDiarios, clientes, dadosFiliais,
   formatCurrency, formatCurrencyShort, formatPercent,
@@ -313,6 +314,10 @@ export default function Index() {
             clientes={filteredClientes}
             onClickRow={c => dispatch({ type: 'OPEN_DRAWER', cliente: c })}
           />
+
+          {/* CTEs Faturados */}
+          <CTEList limit={10} />
+
         </div>
       )}
 

@@ -213,3 +213,41 @@ export const previsaoFechamento = dadosDiarios.reduce((s, d) => s + d.valor, 0) 
 export const variacaoMesAnterior = parseFloat((((MES_ATUAL.valor - MES_ANTERIOR.valor) / MES_ANTERIOR.valor) * 100).toFixed(1));
 export const frotaPropriaMes = MES_ATUAL.frotaPropria;
 export const terceirosMes = MES_ATUAL.terceiros;
+
+// CTEs Faturados
+export interface CTE {
+  numero: string;
+  cliente: string;
+  origem: string;
+  destino: string;
+  valor: number;
+  dataFaturamento: string;
+}
+
+const CIDADES = [
+  'São Paulo/SP', 'Rio de Janeiro/RJ', 'Belo Horizonte/MG', 'Vitória/ES', 'Salvador/BA',
+  'Curitiba/PR', 'Campinas/SP', 'Santos/SP', 'Uberlândia/MG', 'Juiz de Fora/MG',
+  'Niterói/RJ', 'Vila Velha/ES', 'Feira de Santana/BA', 'Ribeirão Preto/SP', 'Sorocaba/SP',
+];
+
+export const ctesFaturados: CTE[] = Array.from({ length: 50 }, (_, i) => {
+  const cliente = NOMES_CLIENTES[srand(0, NOMES_CLIENTES.length - 1)];
+  let origem = CIDADES[srand(0, CIDADES.length - 1)];
+  let destino = CIDADES[srand(0, CIDADES.length - 1)];
+  while (destino === origem) destino = CIDADES[srand(0, CIDADES.length - 1)];
+  const dia = srand(1, 30);
+  const hora = srand(0, 23);
+  const min = srand(0, 59);
+  return {
+    numero: String(100000 + srand(1, 899999)),
+    cliente,
+    origem,
+    destino,
+    valor: srand(1500, 85000),
+    dataFaturamento: `${String(dia).padStart(2, '0')}/03/2025 ${String(hora).padStart(2, '0')}:${String(min).padStart(2, '0')}`,
+  };
+}).sort((a, b) => b.dataFaturamento.localeCompare(a.dataFaturamento));
+
+export const totalCtesFaturados = ctesFaturados.length;
+export const valorTotalCtes = ctesFaturados.reduce((s, c) => s + c.valor, 0);
+
