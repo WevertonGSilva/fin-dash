@@ -9,6 +9,7 @@ import DataTable from '@/components/dashboard/DataTable';
 import ClientDrawer from '@/components/dashboard/ClientDrawer';
 import Filters from '@/components/dashboard/Filters';
 import CTEList from '@/components/dashboard/CTEList';
+import VeiculosPanel from '@/components/dashboard/VeiculosPanel';
 import {
   dadosMensais, dadosDiarios, clientes, dadosFiliais,
   formatCurrency, formatCurrencyShort, formatPercent,
