@@ -314,6 +314,10 @@ export default function Index() {
             clientes={filteredClientes}
             onClickRow={c => dispatch({ type: 'OPEN_DRAWER', cliente: c })}
           />
+
+          {/* CTEs Faturados */}
+          <CTEList limit={10} />
+
         </div>
       )}
 
