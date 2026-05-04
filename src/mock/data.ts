@@ -299,3 +299,38 @@ export const mediaMensalVeiculo: MediaMensalVeiculo[] = [
   { mes: 'Abr', valor: 50000 },
   { mes: 'Mai', valor: 12000 },
 ];
+
+// Últimos veículos faturados (drill-down)
+export interface VeiculoFaturado {
+  placa: string;
+  tipo: string;
+  classificacao: 'Frota Própria' | 'Agregado' | 'Terceiro';
+  cliente: string;
+  rota: string;
+  valor: number;
+  data: string;
+}
+
+const PLACAS_LETRAS = ['ABC', 'DEF', 'GHJ', 'KLM', 'NPQ', 'RST', 'UVW', 'XYZ', 'BRA', 'SPL'];
+const CLASSIFS: VeiculoFaturado['classificacao'][] = ['Frota Própria', 'Agregado', 'Terceiro'];
+
+export const ultimosVeiculosFaturados: VeiculoFaturado[] = Array.from({ length: 60 }, (_, i) => {
+  const tipo = tiposVeiculo[srand(0, tiposVeiculo.length - 1)].tipo;
+  const classificacao = CLASSIFS[srand(0, 2)];
+  const letras = PLACAS_LETRAS[srand(0, PLACAS_LETRAS.length - 1)];
+  const placa = `${letras}-${srand(1000, 9999)}`;
+  const cliente = NOMES_CLIENTES[srand(0, NOMES_CLIENTES.length - 1)];
+  const rota = ROTAS[srand(0, ROTAS.length - 1)];
+  const dia = srand(1, 30);
+  const hora = srand(0, 23);
+  const min = srand(0, 59);
+  return {
+    placa,
+    tipo,
+    classificacao,
+    cliente,
+    rota,
+    valor: srand(3000, 95000),
+    data: `${String(dia).padStart(2, '0')}/03/2025 ${String(hora).padStart(2, '0')}:${String(min).padStart(2, '0')}`,
+  };
+}).sort((a, b) => b.data.localeCompare(a.data));
