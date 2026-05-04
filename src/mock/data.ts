@@ -251,3 +251,51 @@ export const ctesFaturados: CTE[] = Array.from({ length: 50 }, (_, i) => {
 export const totalCtesFaturados = ctesFaturados.length;
 export const valorTotalCtes = ctesFaturados.reduce((s, c) => s + c.valor, 0);
 
+
+// ============ VEÍCULOS / FROTA ============
+export interface VeiculoClassificacao {
+  classificacao: 'Frota Própria' | 'Agregado' | 'Terceiro';
+  valor: number;
+  percentual: number;
+  mediaFaturamento: number;
+  projecao: number;
+}
+
+export interface TipoVeiculo {
+  tipo: string;
+  quantidade: number;
+  percentual: number;
+  valor: number;
+}
+
+export interface MediaMensalVeiculo {
+  mes: string;
+  valor: number; // em milhares
+}
+
+export const veiculosTotal = 451;
+export const valorMedioPorVeiculo = 121304;
+
+export const veiculosPorClassificacao: VeiculoClassificacao[] = [
+  { classificacao: 'Frota Própria', valor: 38050312, percentual: 57.47, mediaFaturamento: 195129, projecao: 47342420 },
+  { classificacao: 'Agregado',      valor: 7232093,  percentual: 10.92, mediaFaturamento: 160713, projecao: 9008305  },
+  { classificacao: 'Terceiro',      valor: 5366763,  percentual: 8.11,  mediaFaturamento: 25434,  projecao: 6657946  },
+];
+
+export const tiposVeiculo: TipoVeiculo[] = [
+  { tipo: 'Cavalo Trucado',   quantidade: 233, percentual: 51.66, valor: 42030778 },
+  { tipo: 'Cavalo Simples',   quantidade: 181, percentual: 40.13, valor: 4371511  },
+  { tipo: 'Cavalo Traçado',   quantidade: 14,  percentual: 3.10,  valor: 3917607  },
+  { tipo: 'Veículo Toco',     quantidade: 12,  percentual: 2.66,  valor: 217796   },
+  { tipo: 'Veículo Truck',    quantidade: 6,   percentual: 1.33,  valor: 54373    },
+  { tipo: 'Carreta Sider LS', quantidade: 3,   percentual: 0.66,  valor: 41747    },
+  { tipo: 'Veículo VUC',      quantidade: 2,   percentual: 0.46,  valor: 15353    },
+];
+
+export const mediaMensalVeiculo: MediaMensalVeiculo[] = [
+  { mes: 'Jan', valor: 57000 },
+  { mes: 'Fev', valor: 60000 },
+  { mes: 'Mar', valor: 66000 },
+  { mes: 'Abr', valor: 50000 },
+  { mes: 'Mai', valor: 12000 },
+];
